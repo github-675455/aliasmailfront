@@ -11,12 +11,9 @@ stages:
 develop_docker:
   stage: build-publish
   script:
-    - mkdir docker/app/
+    - mkdir docker
     - export DOCKER_HOST=$DOCKER_PORT
-    - mv docker/publish/$ASSEMBLY_NAME.* docker/app/
-    - mv docker/publish/*.config docker/app/
-    - mv docker/publish/*.json docker/app/
-    - cp Dockerfile docker/
+    - cp -R ./* docker/
     - docker build -t $TAG ./docker/
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker push $TAG
