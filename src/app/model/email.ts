@@ -1,0 +1,31 @@
+export class Email {
+  id: string;
+  created: Date;
+  senderAddress: string;
+  senderDisplayName: string;
+  fromAddress: string;
+  fromDisplayName: string;
+  toAddress: string;
+  toDisplayName: string;
+  date: Date;
+  originalDate: string;
+  subject: string;
+  messageId: string;
+  received: string;
+  mailAttachments: any[];
+  mailAttachmentsJobStatus: number;
+  recipient: string;
+  remoteIpAddress: string;
+  baseMessageId: string;
+  jobStatus: number;
+  error: boolean;
+  errorMessage: string;
+  errorDate: Date;
+  retries: number;
+  nextRetry: Date;
+  source: number;
+  inReplyTo: string;
+  references: string;
+  userAgent: string;
+  attachments: string;
+}

@@ -1,0 +1,69 @@
+<mat-card class="example-card">
+  <form [formGroup]="autenticarForm" (ngSubmit)="autenticar()" novalidate>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="container">
+        <div class="row">
+          <mat-form-field class="col s6">
+            <input
+              matInput
+              placeholder="Usuário"
+              formControlName="login"
+              autocomplete="off"
+              autofocus
+              required
+            />
+            <mat-error *ngIf="autenticarForm.get('login').hasError('required')">
+              Usuário é <strong>obrigatório</strong>
+            </mat-error>
+            <mat-error *ngIf="autenticarForm.get('login').hasError('pattern')">
+              Usuário é <strong>inválido</strong>
+            </mat-error>
+            <mat-error
+              *ngIf="autenticarForm.get('login').hasError('serverError')"
+            >
+              {{ getServerErrors('login') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col s6">
+            <input
+              matInput
+              placeholder="Senha"
+              type="password"
+              formControlName="senha"
+              (keyup.enter)="autenticar()"
+              required
+            />
+            <mat-error *ngIf="autenticarForm.get('senha').hasError('required')">
+              Senha é <strong>obrigatória</strong>
+            </mat-error>
+            <mat-error
+              *ngIf="autenticarForm.get('senha').hasError('minlength')"
+            >
+              O tamanho mínimo é <strong>8 caracteres</strong>
+            </mat-error>
+            <mat-error
+              *ngIf="autenticarForm.get('senha').hasError('serverError')"
+            >
+              {{ getServerErrors('senha') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        [disabled]="!autenticarForm.valid"
+        color="primary"
+      >
+        <mat-spinner *ngIf="loading" diameter="18" color="warn"></mat-spinner
+        ><b *ngIf="!loading">Entrar</b>
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

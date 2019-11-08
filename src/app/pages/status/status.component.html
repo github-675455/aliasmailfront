@@ -1,0 +1,11 @@
+<div class="main-container">
+  <h3>Status</h3>
+  <div>
+    <button mat-icon-button color="warn" [@changeColor]="isActive">
+      <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+    </button>
+    <span>
+      API: {{ status }} <mat-progress-spinner mode="indeterminate" diameter="20" *ngIf="carregando"></mat-progress-spinner>
+    </span>
+  </div>
+</div>
