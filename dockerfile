@@ -1,5 +1,5 @@
 # STEP 1 build static website
-FROM node:10.15-alpine as builder
+FROM node:13-alpine as builder
 RUN apk update && apk add --no-cache make git
 # Create app directory
 WORKDIR /app
@@ -9,7 +9,7 @@ COPY package.json package-lock.json  /app/
 RUN cd /app
 RUN npm install npm@latest -g
 RUN npm install
-RUN npm link @angular/cli@8.0.0-beta.15
+RUN npm link @angular/cli@latest
 # Copy project files into the docker image
 COPY .  /app
 RUN cd /app
