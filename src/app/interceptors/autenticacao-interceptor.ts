@@ -35,8 +35,8 @@ export class AutenticacaoInterceptor implements HttpInterceptor {
           }
         },
         error => {
-          if (event instanceof HttpResponse) {
-            if (event.status === 401) {
+          if (error instanceof HttpResponse) {
+            if (error.status === 401) {
               this.autenticacaoService.logout();
             }
           }

@@ -20,7 +20,7 @@ import 'hammerjs';
 export class AppComponent {
 
   public isOpened = true;
-  title = 'minhas-financas-webapp';
+  title = 'Alias Mail Front';
   public screenWidth: number;
 
   constructor(
