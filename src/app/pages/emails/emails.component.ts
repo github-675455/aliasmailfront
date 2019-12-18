@@ -32,8 +32,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class EmailsComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'id', 'nome'];
-  dataSource: Array<Email> = [];
-  selection: SelectionModel<Email>;
+  dataSource: Array<any> = [];
+  selection: SelectionModel<any>;
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {

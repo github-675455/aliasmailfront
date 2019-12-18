@@ -49,6 +49,8 @@ export class AppComponent {
       });
     }
 
+    this.subscribeToNotifications();
+
     if (environment.production) {
       const appIsStable$ = appRef.isStable.pipe(
         first(isStable => isStable === true)
@@ -88,7 +90,7 @@ export class AppComponent {
     })
       .then(sub => {
 
-        this.http.post(`${environment.API_URL}${environment.API_VERSION}subscription`, sub).subscribe(d => {
+        this.http.post(`${environment.API_URL}${environment.API_VERSION}Notification`, sub).subscribe(d => {
           console.log('post http');
           console.log(d);
         });
