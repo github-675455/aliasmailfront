@@ -59,6 +59,10 @@ export class AutenticacaoService {
     return this.accessToken;
   }
 
+  setAccessToken(token: string) {
+    return this.accessToken = token;
+  }
+
   emitAutenticado(autenticado: boolean) {
     return this.assinaturaIsAutenticado.next(autenticado);
   }

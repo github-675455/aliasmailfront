@@ -11,6 +11,7 @@ import { concat } from 'rxjs/internal/observable/concat';
 import { first } from 'rxjs/operators';
 import { AskUpdateComponent } from './pages/ask-update/ask-update.component';
 import 'hammerjs';
+import { AutenticacaoService } from './services/autenticacao.service';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,7 @@ export class AppComponent {
     private breakpointObserver: BreakpointObserver,
     private appRef: ApplicationRef,
     private updates: SwUpdate,
+    private autenticacaoService: AutenticacaoService,
     private dialog: MatDialog,
     private swPush: SwPush,
     private http: HttpClient
@@ -88,15 +90,22 @@ export class AppComponent {
     this.swPush.requestSubscription({
       serverPublicKey: environment.VAPID_PUBLIC_KEY
     })
-      .then(sub => {
-
-        this.http.post(`${environment.API_URL}${environment.API_VERSION}Notification`, sub).subscribe(d => {
+      .then(subscriptionData => {
+        const subscriptionJson = subscriptionData.toJSON();
+        this.http.post(`${environment.API_URL}${environment.API_VERSION}Notification`,
+        {
+          PushEndpoint: subscriptionData.endpoint,
+          PushP256DH: subscriptionJson.keys.p256dh,
+          PushAuth: subscriptionJson.keys.auth
+        }).subscribe(d => {
           console.log('post http');
           console.log(d);
         });
-        console.log(sub);
+        console.log(subscriptionData);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+      });
     console.log('click');
   }
 }
